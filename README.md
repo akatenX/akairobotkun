@@ -1,1 +1,4 @@
 # akairobotkun
+身内用discordbot
+色んなところからコードパクッたりして作ったやつです
+apikeyとかいるやつあります
