@@ -287,7 +287,7 @@ async def gen(ctx, arg, arg2):
         await ctx.send("対応しているのは nitro です")
 
 @bot.command()
-async def janken(ctx, arg)
+async def janken(ctx, arg):
     hand = ['グー', 'チョキ', 'パー']
     plhand = arg
     str(plhand)
