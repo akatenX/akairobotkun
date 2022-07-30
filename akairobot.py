@@ -15,14 +15,14 @@ import string
 
 
 
-# token.txtを読み込み
+
 file=open('token.txt')
 tokens=file.read()
 TOKEN = tokens
 file.close()
 bot = commands.Bot(command_prefix="-", case_insensitive=True, help_command=None)
 
-presence = discord.Game("( ・∇・)！")
+presence = discord.Game("discord 動作環境")
 
 @bot.event
 async def on_ready():
@@ -60,7 +60,9 @@ async def help(ctx):
     embed.add_field(name="short", value="urlを短縮するよ！ -url  短縮したいurlだよ！", inline=True)
     embed.add_field(name="botinfo", value="botの情報を表示するよ！", inline=True)
     embed.add_field(name="gen", value="何かをgenerateするよ！ -gen  genしたい物  数 だよ！", inline=True)
-
+    embed.add_field(name="janken", value="じゃんけんするよ！ -janken グー, チョキ, パー だよ！", inline=True)
+    embed.add_field(name="omikuji", value="おみくじがひけるよ！", inline=True)
+    embed.add_field(name="slot", value="スロットができるよ！", inline=True)
     embed.add_field(name="kick", value="kickするよ！", inline=True)
     embed.add_field(name="ban", value="banするよ！", inline=True)
     await ctx.send(embed=embed)
@@ -73,7 +75,7 @@ async def help(ctx):
 async def spamb(ctx, arg1, arg2):
     print("spamwebhook send" + arg1)
     """webhookでスパムする"""
-    webhook_url  = 'https://discord.com/api/webhooks/000010201040245515841684'
+    webhook_url  = 'https://discord.com/api/webhooks//O--t0___-_NFts'
     main_content = {
                    'username': 'akairobotwebhook',
                    'avatar_url': 'https://media.discordapp.net/attachments/970936654401527828/994242796292677733/64_20220706230033.png?width=667&height=667',
@@ -248,7 +250,7 @@ async def trans(ctx, arg1, arg2, arg3):
 @bot.command()
 async def short(ctx, arg):
     print("short")
-    url = 'https://..com/v1/?key=-_'
+    url = 'https://.googleapis.com/v1/shortLinks?key=-Kyv1i_05qsio'
     data = {
         'longDynamicLink': 'https://akairo.page.link/?link=' + str(arg),
         'suffix': {
@@ -295,7 +297,7 @@ async def janken(ctx, arg):
     await ctx.send("あなた:" + plhand)
     await ctx.send("CPU:" + cpuhand)
     if plhand == cpuhand:
-      print("あいこだよ！")
+      await ctx.send("あいこだよ！")
     else:
       if plhand == "グー":
         if cpuhand == "チョキ":
@@ -308,11 +310,52 @@ async def janken(ctx, arg):
         if cpuhand == "グー":
           await ctx.send("あなたの負け！")
       elif plhand == "パー":
-        if cpuhan == "グー":
+        if cpuhand == "グー":
           await ctx.send("あなたの勝ち！")
         if cpuhand == "チョキ":
           await ctx.send("あなたの負け！")
       
+@bot.command()
+async def omikuji(ctx):
+    omi = ['大吉', '中吉', '小吉', '吉', '凶', '大凶']
+    kekka = random.choice(omi)
+    await ctx.send("結果は" + kekka + "だよ！")
+
+@bot.command()
+async def slot(ctx):
+    naka = ["7️⃣", "🕶", "😊", "😭", "🎩", "😶", "🤔", "‼️", "❓"]
+    #naka=["7"]
+    one = random.choice(naka)
+    two = random.choice(naka)
+    three=random.choice(naka)
+    await ctx.send(one+two+three)
+    if one == two:#1と2がおなじで
+      if two == three:#3も同じなら
+        await ctx.send("当たり！")#あたり ctx.send
+      else:#同じじゃないなら
+        await ctx.send("ハズレ")#はずれ
+    else:
+      if two == three:#2と3がおなじなら
+        if three == one:#1もおなじなら
+          await ctx.send("当たり！")#あたり
+        else:#ちがうなら
+          await ctx.send("ハズレ")#はずれ
+      elif three == one:#3と1が同じなら
+        if one == two:#2も同じなら
+          await ctx.send("当たり！")#当たり
+        else:#それ以外
+          await ctx.send("ハズレ")#はずれ
+      else:
+        await ctx.send("ハズレ")
+
+
+
+
+
+
+
+
+
 
 
 bot.run(TOKEN)
